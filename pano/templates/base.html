@@ -8,12 +8,12 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
-
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 </head>
 
 <body>
 
-		<a href="{{ url_for('index') }}">home</a> | <a href="{{ url_for('pano', id=1) }}">pano</a> | <a href="{{ url_for('admin') }}">admin</a>
+		<a href="{{ url_for('index') }}">home</a> | <a href="{{ url_for('admin') }}">admin</a>
 
     {% block content %}
     {% endblock %}

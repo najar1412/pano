@@ -10,7 +10,8 @@ app.config.from_object(config.Config)
 @app.route('/')
 def index():
     panos = pano_io.PanoIo().get_all_from_server()
-    return render_template('index.html')
+    return render_template('index.html', panos=panos)
+
 
 @app.route('/pano/<int:id>')
 def pano(id):

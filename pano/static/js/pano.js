@@ -1,7 +1,7 @@
 // Init Scene, gui params
 var scene = new THREE.Scene({ background: 0xffffff });
 var params = {
-    CA: true,
+    CA: false,
     FGLightMap: 1,
     FGLightMapColor: "#ffae23",
     exposure: 2,
@@ -13,41 +13,43 @@ var params = {
 
 //GUI
 var gui = new dat.GUI();
+var f1 = gui.addFolder('Background');
+var f2 = gui.addFolder('Foreground');
+var f3 = gui.addFolder('Lens Effects');
 
-gui.add(params, 'CA', false).onChange(function (value) {
-    if (value == true) {
-        rgbShift.uniforms.amount.value = .0005;
-    } else {
-        rgbShift.uniforms.amount.value = 0;
-    };
-});
-
-gui.add(params, 'FGLightMap', 0, 3).onChange(function (value) {
-    foreground_material.emissiveIntensity = Number(value);
-});
-
-var fg_light_color = gui.addColor(params, 'FGLightMapColor').listen();
-fg_light_color.onChange(function (value) // onFinishChange
-{ foreground_geo.material.emissive.setHex(value.replace("#", "0x")); });
-
-
-gui.add(params, 'exposure', 0, 5).onChange(function (value) {
+f2.add(params, 'exposure', 0, 5).onChange(function (value) {
     light.intensity = Number(value);
 });
-gui.add(params, 'bloomThreshold', 0.0, 1.0).onChange(function (value) {
+f2.add(params, 'FGLightMap', 0, 3).onChange(function (value) {
+    foreground_material.emissiveIntensity = Number(value);
+});
+var fg_light_color = f2.addColor(params, 'FGLightMapColor').listen();
+fg_light_color.onChange(function (value) { 
+    foreground_geo.material.emissive.setHex(value.replace("#", "0x")); 
+});
+f2.add(params, 'bloomThreshold', 0.0, 1.0).onChange(function (value) {
     bloomPass.threshold = Number(value);
 });
-gui.add(params, 'bloomStrength', 0.0, 3.0).onChange(function (value) {
+f2.add(params, 'bloomStrength', 0.0, 3.0).onChange(function (value) {
     bloomPass.strength = Number(value);
 });
-gui.add(params, 'bloomRadius', 0.0, 2).onChange(function (value) {
+f2.add(params, 'bloomRadius', 0.0, 2).onChange(function (value) {
     bloomPass.radius = Number(value);
 });
-gui.add(params, 'focalLength', 0.0, 100).onChange(function (value) {
+
+
+f3.add(params, 'CA', false).onChange(function (value) {
+    if (value == false) {
+        rgbShift.uniforms.amount.value = 0;
+    } else {
+        rgbShift.uniforms.amount.value = .0005;
+    };
+});
+f3.add(params, 'focalLength', 0.0, 100).onChange(function (value) {
     camera.fov = Number(value);
     camera.updateProjectionMatrix()
 });
-gui.open();
+
 
 // LIGHTING/ENV
 var light = new THREE.AmbientLight(0xffffff, 2); // soft white light
@@ -57,7 +59,7 @@ scene.add(light);
 var manager = new THREE.LoadingManager();
 manager.onStart = function (url, itemsLoaded, itemsTotal) {
     console.log('Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
-    //gui.GUI.toggleHide();
+    gui.closed = true;
 };
 
 manager.onLoad = function () {
@@ -154,7 +156,7 @@ renderPass = new THREE.RenderPass(scene, camera);
 copyPass = new THREE.ShaderPass(THREE.CopyShader);
 bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), .5, 1.5, .85, 1024);
 rgbShift = new THREE.ShaderPass(THREE.RGBShiftShader);
-rgbShift.uniforms.amount.value = .001;
+rgbShift.uniforms.amount.value = 0;
 
 composer.addPass(renderPass);
 // composer.addPass( bloomPass );

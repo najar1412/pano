@@ -3,75 +3,12 @@ var scene = new THREE.Scene({ background: 0xffffff });
 var params = {
     CA: false,
     FGLightMap: 1,
-    FGLightMapColor: "#ffae23",
+    FGLightMapColor: "#ffffff",
     exposure: 2,
     bloomStrength: 0,
     bloomThreshold: 0,
     bloomRadius: 0,
     focalLength: 50
-};
-
-//GUI
-var gui = new dat.GUI();
-var f1 = gui.addFolder('Background');
-var f2 = gui.addFolder('Foreground');
-var f3 = gui.addFolder('Lens Effects');
-
-f2.add(params, 'exposure', 0, 5).onChange(function (value) {
-    light.intensity = Number(value);
-});
-f2.add(params, 'FGLightMap', 0, 3).onChange(function (value) {
-    foreground_material.emissiveIntensity = Number(value);
-});
-var fg_light_color = f2.addColor(params, 'FGLightMapColor').listen();
-fg_light_color.onChange(function (value) { 
-    foreground_geo.material.emissive.setHex(value.replace("#", "0x")); 
-});
-f2.add(params, 'bloomThreshold', 0.0, 1.0).onChange(function (value) {
-    bloomPass.threshold = Number(value);
-});
-f2.add(params, 'bloomStrength', 0.0, 3.0).onChange(function (value) {
-    bloomPass.strength = Number(value);
-});
-f2.add(params, 'bloomRadius', 0.0, 2).onChange(function (value) {
-    bloomPass.radius = Number(value);
-});
-
-
-f3.add(params, 'CA', false).onChange(function (value) {
-    if (value == false) {
-        rgbShift.uniforms.amount.value = 0;
-    } else {
-        rgbShift.uniforms.amount.value = .0005;
-    };
-});
-f3.add(params, 'focalLength', 0.0, 100).onChange(function (value) {
-    camera.fov = Number(value);
-    camera.updateProjectionMatrix()
-});
-
-
-// LIGHTING/ENV
-var light = new THREE.AmbientLight(0xffffff, 2); // soft white light
-scene.add(light);
-
-// LOADING MANAGER
-var manager = new THREE.LoadingManager();
-manager.onStart = function (url, itemsLoaded, itemsTotal) {
-    console.log('Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
-    gui.closed = true;
-};
-
-manager.onLoad = function () {
-    allItemsLoaded();
-};
-
-manager.onProgress = function (url, itemsLoaded, itemsTotal) {
-    console.log('Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
-};
-
-manager.onError = function (url) {
-    console.log('There was an error loading ' + url);
 };
 
 // CAMERA
@@ -80,7 +17,7 @@ camera.position.x = 0;
 camera.position.y = 2;
 camera.position.z = 10;
 
-var renderer = new THREE.WebGLRenderer({ antialias: true, toneMappingExposure: 3 });
+var renderer = new THREE.WebGLRenderer({ antialias: true});
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
@@ -125,7 +62,7 @@ background_texture.repeat.x = -1;
 var foreground_material = new THREE.MeshStandardMaterial({
     map: foreground_texture,
     alphaMap: foreground_alpha,
-    emissive: "#ffae23",
+    emissive: "#ffffff",
     emissiveMap: emissive_texture,
     emissiveIntensity: 1,
     transparent: true,
@@ -148,6 +85,78 @@ background_mesh = new THREE.Mesh(background_geo, background_material);
 
 scene.add(foreground_mesh);
 scene.add(background_mesh);
+
+
+
+
+//GUI
+var gui = new dat.GUI();
+var f1 = gui.addFolder('Background');
+var f2 = gui.addFolder('Foreground');
+var f3 = gui.addFolder('Lens Effects');
+
+f2.add(params, 'exposure', 0, 5).onChange(function (value) {
+    light.intensity = Number(value);
+});
+f2.add(params, 'FGLightMap', 0, 3).onChange(function (value) {
+    foreground_material.emissiveIntensity = Number(value);
+});
+
+var fg_emissive = f2.addColor( params, 'FGLightMapColor' ).name('Emissive Light Color').listen();
+fg_emissive.onChange(function(value) {
+    foreground_mesh.material.emissive.setHex( value.replace("#", "0x") );
+});
+
+
+f2.add(params, 'bloomThreshold', 0.0, 1.0).onChange(function (value) {
+    bloomPass.threshold = Number(value);
+});
+f2.add(params, 'bloomStrength', 0.0, 3.0).onChange(function (value) {
+    bloomPass.strength = Number(value);
+});
+f2.add(params, 'bloomRadius', 0.0, 2).onChange(function (value) {
+    bloomPass.radius = Number(value);
+});
+
+f3.add(params, 'CA', false).onChange(function (value) {
+    if (value == false) {
+        rgbShift.uniforms.amount.value = 0;
+    } else {
+        rgbShift.uniforms.amount.value = .0005;
+    };
+});
+f3.add(params, 'focalLength', 0.0, 100).onChange(function (value) {
+    camera.fov = Number(value);
+    camera.updateProjectionMatrix()
+});
+update();
+
+
+// LIGHTING/ENV
+var light = new THREE.AmbientLight(0xffffff, 2); // soft white light
+scene.add(light);
+
+// LOADING MANAGER
+var manager = new THREE.LoadingManager();
+manager.onStart = function (url, itemsLoaded, itemsTotal) {
+    console.log('Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
+    gui.closed = true;
+};
+
+manager.onLoad = function () {
+    allItemsLoaded();
+};
+
+manager.onProgress = function (url, itemsLoaded, itemsTotal) {
+    console.log('Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
+};
+
+manager.onError = function (url) {
+    console.log('There was an error loading ' + url);
+};
+
+
+
 
 //POST PROCESSING
 composer = new THREE.EffectComposer(renderer);
@@ -186,3 +195,8 @@ function allItemsLoaded() {
     // fade in content (using opacity instead of fadein() so it retains it's height.
     $('.loading-container > *:not(.onepix-imgloader)').fadeTo(8000, 100);
 }
+
+function update() {
+    foreground_geo.material = new THREE.MeshStandardMaterial({color: 0x000000})
+    foreground_geo.material.emissive.setHex(params.FGLightMapColor.replace("#", "0x"))
+};

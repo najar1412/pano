@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>pano 0.0.1</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+	<script src="https://cdn.jsdelivr.net/gh/heartcode/CanvasLoader@0.9.1/js/heartcode-canvasloader-min.js"></script>
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	 crossorigin="anonymous"></script>
+
+	<script src="/static/js/threejs/three.min.js"></script>
+	<script src="/static/js/threejs/OrbitControls.js"></script>
+	<script src="/static/js/threejs/EffectComposer.js"></script>
+	<script src="/static/js/threejs/RenderPass.js"></script>
+	<script src="/static/js/threejs/ShaderPass.js"></script>
+	<script src="/static/js/threejs/CopyShader.js"></script>
+	<script src="/static/js/threejs/DotScreenShader.js"></script>
+	<script src="/static/js/threejs/UnrealBloomPass.js"></script>
+	<script src="/static/js/threejs/ConvolutionShader.js"></script>
+	<script src="/static/js/threejs/LuminosityHighPassShader.js"></script>
+	<script src="/static/js/threejs/dat.gui.min.js"></script>
+	<script src="/static/js/threejs/RgbShiftShader.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+
+</head>
+
+<body>
+	<div class="copyright">
+		pubpano
+		<br> alpha 0.0.1
+		<br>
+	</div>
+
+	<div class="watermark">
+		visualhouse
+	</div>
+
+	<div class="loading-container">
+		<div id="container">
+		</div>
+	</div>
+
+	<div id="container"></div>
+
+	<script src="/static/js/pano_loading.js"></script>
+	<script src="/static/js/pano.js"></script>
+
+</body>
+
+</html>

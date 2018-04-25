@@ -1,0 +1,45 @@
+body {
+    background-color: #ffffff;
+    margin: 0px;
+    overflow: hidden;
+}
+.dg.ac {
+    z-index: 1 !important; /* FIX DAT.GUI */
+}
+.copyright {
+    position: absolute;
+    z-index: 1000;
+    padding:50px;
+    color:white;
+}
+.watermark {
+    position: absolute;
+    z-index: 1000;
+    right:0;
+    bottom:0;
+    padding:50px;
+    color:white;
+}
+.onepix-imgloader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1000;
+}
+/*hide the second element in the loading container (first element is the leading img)*/
+.loading-container > *:not(.onepix-imgloader) {
+    filter:alpha(opacity=0);
+    -moz-opacity:0;
+    -khtml-opacity:0;
+    opacity:0;
+}
+.loading-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-height: 40px;
+}
+#container {
+/*    min-width: 400px;*/
+width: 100px;
+}

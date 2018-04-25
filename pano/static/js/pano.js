@@ -11,6 +11,28 @@ var params = {
     focalLength: 50
 };
 
+// LIGHTING/ENV
+var light = new THREE.AmbientLight(0xffffff, 2); // soft white light
+scene.add(light);
+
+// LOADING MANAGER
+var manager = new THREE.LoadingManager();
+manager.onStart = function (url, itemsLoaded, itemsTotal) {
+    console.log('Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
+};
+
+manager.onLoad = function () {
+    allItemsLoaded();
+};
+
+manager.onProgress = function (url, itemsLoaded, itemsTotal) {
+    console.log('Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
+};
+
+manager.onError = function (url) {
+    console.log('There was an error loading ' + url);
+};
+
 // CAMERA
 var camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 200);
 camera.position.x = 0;
@@ -107,7 +129,6 @@ fg_emissive.onChange(function(value) {
     foreground_mesh.material.emissive.setHex( value.replace("#", "0x") );
 });
 
-
 f2.add(params, 'bloomThreshold', 0.0, 1.0).onChange(function (value) {
     bloomPass.threshold = Number(value);
 });
@@ -129,31 +150,9 @@ f3.add(params, 'focalLength', 0.0, 100).onChange(function (value) {
     camera.fov = Number(value);
     camera.updateProjectionMatrix()
 });
+gui.closed = true;
 update();
 
-
-// LIGHTING/ENV
-var light = new THREE.AmbientLight(0xffffff, 2); // soft white light
-scene.add(light);
-
-// LOADING MANAGER
-var manager = new THREE.LoadingManager();
-manager.onStart = function (url, itemsLoaded, itemsTotal) {
-    console.log('Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
-    gui.closed = true;
-};
-
-manager.onLoad = function () {
-    allItemsLoaded();
-};
-
-manager.onProgress = function (url, itemsLoaded, itemsTotal) {
-    console.log('Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
-};
-
-manager.onError = function (url) {
-    console.log('There was an error loading ' + url);
-};
 
 
 

@@ -68,7 +68,7 @@ var foreground_alpha = loader.load('/static/pano/01/AJ001-VR1-Interior_Office_al
 var background_texture = loader.load('/static/pano/01/AJ001-VR1-Interior_Office_bg.jpg');
 var background_emissive_texture = emissive_texture.clone();
 
-foreground_texture.anisotropy = 32;
+foreground_texture.anisotropy = 16;
 foreground_texture.wrapS = THREE.RepeatWrapping;
 foreground_texture.repeat.x = -1;
 foreground_alpha.wrapS = THREE.RepeatWrapping;
@@ -79,6 +79,7 @@ emissive_texture.repeat.x = -1;
 
 background_texture.wrapS = THREE.RepeatWrapping;
 background_texture.repeat.x = -1;
+
 
 // MATERIALS
 var foreground_material = new THREE.MeshStandardMaterial({
@@ -100,7 +101,7 @@ var background_material = new THREE.MeshStandardMaterial({
 
 // GEOMETRY
 var foreground_geo = new THREE.SphereBufferGeometry(50, 100, 100);
-var background_geo = new THREE.SphereBufferGeometry(100, 60, 40);
+var background_geo = new THREE.SphereBufferGeometry(100, 60, 100);
 
 foreground_mesh = new THREE.Mesh(foreground_geo, foreground_material);
 background_mesh = new THREE.Mesh(background_geo, background_material);
@@ -152,10 +153,6 @@ f3.add(params, 'focalLength', 0.0, 100).onChange(function (value) {
 });
 gui.closed = true;
 update();
-
-
-
-
 
 //POST PROCESSING
 composer = new THREE.EffectComposer(renderer);

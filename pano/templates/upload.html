@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+<div style="padding-left:5%;padding-right:5%;">
+
+        <form>
+      
+          <div class="form-group">
+            <label for="pano_name">Name</label>
+            <input type="text" class="form-control" id="pano_name" aria-describedby="nameHelp" placeholder="Name">
+            <small id="nameHelp" class="form-text text-muted">Give your 360 a name.</small>
+          </div>
+      
+          <div class="form-group">
+              <label for="pano_desc">Description</label>
+              <input type="text" class="form-control" id="pano_desc" aria-describedby="descHelp" placeholder="Description">
+              <small id="descHelp" class="form-text text-muted">Give your 360 a description.</small>
+            </div>
+      
+      <div class="form-group">
+          <label for="pano_rgb">RGB Pass</label><br>
+          <input id="pano_rgb" type=file name=file>
+      </div>
+      
+      <div class="form-group">
+          <label for="pano_rgb">Alpha (Window) Pass</label><br>
+          <input id="pano_rgb" type=file name=file>
+      </div>
+      
+      <div class="form-group">
+          <label for="pano_rgb">Emissive (self-Illum) Pass</label><br>
+          <input id="pano_rgb" type=file name=file>
+      </div>
+      
+      <div class="form-group">
+          <label for="pano_rgb">Background Pass</label><br>
+          <input id="pano_rgb" type=file name=file>
+      </div>
+      
+      <input type=submit class="btn btn-primary" value=Upload>
+      
+        </form>
+      
+      </div>
+
+      {% endblock %}

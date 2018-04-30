@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 
 import module.pano_io as pano_io
+
 import config
 
 
@@ -15,12 +16,18 @@ def index():
 
 @app.route('/pano/<int:id>')
 def pano(id):
-    return render_template('pano.html')
+    pano = pano_io.PanoDb().get(1)
+    return render_template('pano.html', pano=pano)
 
 
 @app.route('/admin')
 def admin():
     return render_template('admin.html')
+
+
+@app.route('/upload')
+def upload():
+    return render_template('upload.html')
 
 
 if __name__ == '__main__':

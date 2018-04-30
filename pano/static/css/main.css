@@ -10,7 +10,17 @@ body {
     position: absolute;
     z-index: 1000;
     padding:50px;
+    bottom:0;
     color:white;
+}
+.floorplan {
+    position: absolute;
+    z-index: 1000;
+    padding:10px;
+    max-width:200px;
+    max-height:200px;
+    color:white;
+    opacity: 0.9;
 }
 .watermark {
     position: absolute;

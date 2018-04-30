@@ -11,28 +11,6 @@ var params = {
     focalLength: 50
 };
 
-// LIGHTING/ENV
-var light = new THREE.AmbientLight(0xffffff, 2); // soft white light
-scene.add(light);
-
-// LOADING MANAGER
-var manager = new THREE.LoadingManager();
-manager.onStart = function (url, itemsLoaded, itemsTotal) {
-    console.log('Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
-};
-
-manager.onLoad = function () {
-    allItemsLoaded();
-};
-
-manager.onProgress = function (url, itemsLoaded, itemsTotal) {
-    console.log('Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
-};
-
-manager.onError = function (url) {
-    console.log('There was an error loading ' + url);
-};
-
 // CAMERA
 var camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 200);
 camera.position.x = 0;
@@ -44,18 +22,12 @@ renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// ORBIT CONTROLS
-var controls = new THREE.OrbitControls(camera, renderer.domElement);
-controls.mouseButtons = {
-    ORBIT: THREE.MOUSE.LEFT
-};
-controls.enableZoom = false;
-controls.enableDamping = true;
-controls.dampingFactor = 0.12;
-controls.rotateSpeed = 0.1;
-controls.autoRotate = true;
-controls.autoRotateSpeed = 0.01;
-// controls.maxPolarAngle = Math.PI/2; // Don't let to go below the ground
+const manager = loadingManager();
+const orbit_controls = OrbitControls(camera, renderer.domElement);
+
+// LIGHTING/ENV
+var light = new THREE.AmbientLight(0xffffff, 2); // soft white light
+scene.add(light);
 
 // MAPS
 var loader = new THREE.TextureLoader(manager)
@@ -172,7 +144,7 @@ copyPass.renderToScreen = true;
 // RENDER LOOP
 function render() {
     requestAnimationFrame(render);
-    controls.update();
+    orbit_controls.update();
     composer.render();
 }
 

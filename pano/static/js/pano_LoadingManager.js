@@ -21,3 +21,9 @@ function loadingManager() {
 
     return manager
 }
+
+function allItemsLoaded() {
+    $('.onepix-imgloader').fadeOut();
+    // fade in content (using opacity instead of fadein() so it retains it's height.
+    $('.loading-container > *:not(.onepix-imgloader)').fadeTo(8000, 100);
+}

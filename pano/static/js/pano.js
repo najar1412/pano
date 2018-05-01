@@ -71,7 +71,6 @@ function onWindowResize() {
 }
 
 function updateRotation() {
-    // const labelEl = document.getElementById('contenty');
     const miniMap = document.getElementById('radar');
 
     const heading = camera.rotation.y;
@@ -80,7 +79,6 @@ function updateRotation() {
       : (2 * Math.PI) + heading;
     const degrees = THREE.Math.radToDeg(radians);
     const degreesRounded = Math.floor(degrees);
-    // labelEl.innerHTML = String(`${degreesRounded} degrees`);
     $(miniMap).css({
         'position': 'relative',
         'bottom': '160px',

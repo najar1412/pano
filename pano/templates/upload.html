@@ -5,41 +5,51 @@
 
 <div style="padding-left:5%;padding-right:5%;">
 
-        <form>
+        <form enctype="multipart/form-data" action="{{url_for('uploading')}}" method="POST">
       
           <div class="form-group">
             <label for="pano_name">Name</label>
-            <input type="text" class="form-control" id="pano_name" aria-describedby="nameHelp" placeholder="Name">
+            <input type="text" class="form-control" name="pano_name" id="pano_name" aria-describedby="nameHelp" placeholder="Name">
             <small id="nameHelp" class="form-text text-muted">Give your 360 a name.</small>
           </div>
       
           <div class="form-group">
               <label for="pano_desc">Description</label>
-              <input type="text" class="form-control" id="pano_desc" aria-describedby="descHelp" placeholder="Description">
+              <input type="text" class="form-control" name="pano_desc" id="pano_desc" aria-describedby="descHelp" placeholder="Description">
               <small id="descHelp" class="form-text text-muted">Give your 360 a description.</small>
             </div>
       
       <div class="form-group">
-          <label for="pano_rgb">RGB Pass</label><br>
-          <input id="pano_rgb" type=file name=file>
+          <label for="pano_fg_img">FG</label><br>
+          <input name="pano_fg_img" id="pano_fg_img" type=file>
+      </div>
+
+      <div class="form-group">
+            <label for="pano_bg_img">BG</label><br>
+            <input name="pano_bg_img" id="pano_bg_img" type=file>
+        </div>
+      
+      <div class="form-group">
+          <label for="pano_alpha_img">Alpha (Window) Pass</label><br>
+          <input name="pano_alpha_img" id="pano_alpha_img" type=file>
       </div>
       
       <div class="form-group">
-          <label for="pano_rgb">Alpha (Window) Pass</label><br>
-          <input id="pano_rgb" type=file name=file>
+          <label for="pano_emissive_img">Emissive (self-Illum) Pass</label><br>
+          <input name="pano_emissive_img" id="pano_emissive_img" type=file>
       </div>
       
       <div class="form-group">
-          <label for="pano_rgb">Emissive (self-Illum) Pass</label><br>
-          <input id="pano_rgb" type=file name=file>
+          <label for="pano_floorplan_img">floorplan</label><br>
+          <input name="pano_floorplan_img" id="pano_floorplan_img" type=file>
       </div>
-      
+
       <div class="form-group">
-          <label for="pano_rgb">Background Pass</label><br>
-          <input id="pano_rgb" type=file name=file>
-      </div>
+            <label for="pano_thumb_img">thumbnail</label><br>
+            <input name="pano_thumb_img" id="pano_thumb_img" type=file>
+        </div>
       
-      <input type=submit class="btn btn-primary" value=Upload>
+      <input type=submit class="btn btn-primary">
       
         </form>
       

@@ -22,6 +22,11 @@ body {
     color:white;
     opacity: 0.9;
 }
+.floorplan .radar img {
+    margin-left: auto;
+	margin-right: auto;
+    display: block;
+}
 .watermark {
     position: absolute;
     z-index: 1000;

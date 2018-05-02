@@ -8,7 +8,8 @@ var params = {
     bloomStrength: 0,
     bloomThreshold: 0,
     bloomRadius: 0,
-    focalLength: 50
+    focalLength: 50,
+    enableMinimap: true
 };
 
 // CAMERA

@@ -1,9 +1,12 @@
+console.log(CLASS_ID_FLOORPLAN)
+
 function gui() {
     //GUI
     var gui = new dat.GUI();
     var f1 = gui.addFolder('Background');
     var f2 = gui.addFolder('Foreground');
     var f3 = gui.addFolder('Lens Effects');
+    var f4 = gui.addFolder('HUD');
 
     f2.add(params, 'exposure', 0, 5).onChange(function (value) {
         light.intensity = Number(value);
@@ -38,6 +41,19 @@ function gui() {
         camera.fov = Number(value);
         camera.updateProjectionMatrix()
     });
+
+    f4.add(params, 'enableMinimap', true).onChange(function (value) {
+        if (value == false) {
+            $(CLASS_ID_FLOORPLAN).css({
+                'display': 'none'
+              });
+        } else {
+            $(CLASS_ID_FLOORPLAN).css({
+                'display': 'block'
+              });
+        };
+    });
+
     gui.closed = true;
 }
 

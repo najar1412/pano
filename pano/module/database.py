@@ -1,4 +1,8 @@
 from collections import namedtuple
+import os
+import shutil
+
+import config
 
 
 def dto(
@@ -21,6 +25,7 @@ class Pano():
 
     def _to_dict(self, row):
         return {
+            'id': row.id,
             'name': row.name,
             'desc': row.desc,
             'fg_img': row.fg_img,
@@ -46,6 +51,23 @@ class Pano():
 
         self.db.session.add(pano)
         self.db.session.commit()
+
+
+    def delete(self, id):
+        pano = self.model.query.filter_by(id=id).first()
+        pano_folder = os.path.join(config.Config().app_root, 'static', 'pano', pano.name)
+        try:
+            shutil.rmtree(pano_folder)
+        except:
+            # erm...
+            pass
+
+    
+        self.db.session.delete(pano)
+        self.db.session.commit()
+
+        return True
+        
 
 
     def get_by_id(self, id):

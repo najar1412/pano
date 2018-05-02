@@ -1,11 +1,19 @@
+console.log(FG_IMG)
+console.log(BG_IMG)
+console.log(ALPHA_IMG)
+console.log(EMISSIVE_IMG)
+console.log(THUMB_IMG)
+console.log(FLOORPLAN_IMG)
+console.log(PANO_NAME)
+
 function mat_foreground(manager) {
     var loader = new THREE.TextureLoader(manager);
 
 
-    var emissive_texture = loader.load('/static/pano/default/default_emissive.jpg');
+    var emissive_texture = loader.load('/static/pano/' + PANO_NAME + '/' + EMISSIVE_IMG);
 
-    var foreground_texture = loader.load('/static/pano/default/default_fg.jpg');
-    var foreground_alpha = loader.load('/static/pano/default/default_alpha.jpg');
+    var foreground_texture = loader.load('/static/pano/' + PANO_NAME + '/' + FG_IMG);
+    var foreground_alpha = loader.load('/static/pano/' + PANO_NAME + '/' + ALPHA_IMG);
 
 
     foreground_texture.anisotropy = 16;
@@ -33,7 +41,7 @@ function mat_foreground(manager) {
 function mat_background(manager) {
     var loader = new THREE.TextureLoader(manager)
 
-    var background_texture = loader.load('/static/pano/default/default_bg.jpg');
+    var background_texture = loader.load('/static/pano/' + PANO_NAME + '/' + BG_IMG);
 
     background_texture.wrapS = THREE.RepeatWrapping;
     background_texture.repeat.x = -1;

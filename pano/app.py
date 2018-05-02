@@ -38,7 +38,6 @@ def index():
     panos = pano_io.PanoIo().get_all_from_server()
     test = module.database.Pano(model=Pano).get_all()
 
-    print(test)
 
     return render_template('index.html', panos=panos, test=test)
 
@@ -49,6 +48,16 @@ def pano(id):
     test = module.database.Pano(model=Pano).get_by_id(id)
 
     return render_template('pano.html', pano=pano, test=test)
+
+@app.route('/pano/delete/<int:id>')
+def pano_delete(id):
+    deleting_pano = module.database.Pano(db=db, model=Pano).delete(id)
+    if deleting_pano:
+        print('items deleted')
+    else:
+        print('its not deleted')
+
+    return redirect(url_for('index'))
 
 
 @app.route('/admin')

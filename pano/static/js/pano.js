@@ -4,6 +4,7 @@ var params = {
     CA: false,
     FGLightMap: 1,
     FGLightMapColor: "#ffffff",
+    bg_brightness: 0.3,
     exposure: 2,
     bloomStrength: 0,
     bloomThreshold: 0,

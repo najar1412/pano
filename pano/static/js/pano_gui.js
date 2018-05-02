@@ -8,11 +8,15 @@ function gui() {
     var f3 = gui.addFolder('Lens Effects');
     var f4 = gui.addFolder('HUD');
 
+    f1.add(params, 'bg_brightness', 0, 1).onChange(function (value) {
+        background_mesh.material.emissiveIntensity = Number(value);
+    });
+
     f2.add(params, 'exposure', 0, 5).onChange(function (value) {
         light.intensity = Number(value);
     });
     f2.add(params, 'FGLightMap', 0, 3).onChange(function (value) {
-        foreground_material.emissiveIntensity = Number(value);
+        foreground_mesh.material.emissiveIntensity = Number(value);
     });
 
     var fg_emissive = f2.addColor( params, 'FGLightMapColor' ).name('Emissive Light Color').listen();

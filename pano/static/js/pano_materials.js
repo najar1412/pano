@@ -2,10 +2,10 @@ function mat_foreground(manager) {
     var loader = new THREE.TextureLoader(manager);
 
 
-    var emissive_texture = loader.load('/static/pano/01/AJ001-VR1-Interior_Office_emission.jpg');
+    var emissive_texture = loader.load('/static/pano/default/default_emissive.jpg');
 
-    var foreground_texture = loader.load('/static/pano/01/AJ001-VR1-Interior_Office_fg.jpg');
-    var foreground_alpha = loader.load('/static/pano/01/AJ001-VR1-Interior_Office_alpha.jpg');
+    var foreground_texture = loader.load('/static/pano/default/default_fg.jpg');
+    var foreground_alpha = loader.load('/static/pano/default/default_alpha.jpg');
 
 
     foreground_texture.anisotropy = 16;
@@ -33,7 +33,7 @@ function mat_foreground(manager) {
 function mat_background(manager) {
     var loader = new THREE.TextureLoader(manager)
 
-    var background_texture = loader.load('/static/pano/01/AJ001-VR1-Interior_Office_bg.jpg');
+    var background_texture = loader.load('/static/pano/default/default_bg.jpg');
 
     background_texture.wrapS = THREE.RepeatWrapping;
     background_texture.repeat.x = -1;

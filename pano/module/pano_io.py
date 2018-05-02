@@ -10,12 +10,12 @@ fake_data = {
     'name': 'AJ001-VR1-Interior_Office_',
     'desc': 'bla bla bla some text to go with the 360 bla bla bla',
     'pubdate': '04.25.18',
-    'thumb': 'AJ001-VR1-Interior_Office_thumb.jpg',
+    'thumb': 'default_thumb.jpg',
     'passes': [
-        'AJ001-VR1-Interior_Office_alpha.jpg',
-        'AJ001-VR1-Interior_Office_bg.jpg',
-        'AJ001-VR1-Interior_Office_emission.jpg',
-        'AJ001-VR1-Interior_Office_fg.jpg',
+        'default_alpha.jpg',
+        'default_bg.jpg',
+        'default_emissive.jpg',
+        'default_fg.jpg',
         ]
 }
 
@@ -24,11 +24,11 @@ model_fake_data = {
     'name': 'AJ001-VR1-Interior_Office_',
     'desc': 'bla bla bla some text to go with the 360 bla bla bla',
     'pubdate': '04.25.18',
-    'thumb': 'AJ001-VR1-Interior_Office_thumb.jpg',
-    'fg': 'AJ001-VR1-Interior_Office_fg.jpg',
-    'alpha': 'AJ001-VR1-Interior_Office_alpha.jpg',
-    'bg': 'AJ001-VR1-Interior_Office_bg.jpg',
-    'emissive': 'AJ001-VR1-Interior_Office_emission.jpg'
+    'thumb': 'default_thumb.jpg',
+    'fg': 'default_fg.jpg',
+    'alpha': 'default_alpha.jpg',
+    'bg': 'default_bg.jpg',
+    'emissive': 'default_emissive.jpg'
 }
 
 Pano = namedtuple('Pano', 'id, name, desc, pubdate, thumb, fg, alpha, bg, emissive')
@@ -69,12 +69,12 @@ class PanoIo():
                 'name': 'AJ001-VR1-Interior_Office_',
                 'desc': 'bla bla bla some text to go with the 360 bla bla bla',
                 'pubdate': '04.25.18',
-                'thumb': 'AJ001-VR1-Interior_Office_thumb.jpg',
+                'thumb': 'default_thumb.jpg',
                 'passes': [
-                    'AJ001-VR1-Interior_Office_alpha.jpg',
-                    'AJ001-VR1-Interior_Office_bg.jpg',
-                    'AJ001-VR1-Interior_Office_emission.jpg',
-                    'AJ001-VR1-Interior_Office_fg.jpg',
+                    'default_alpha.jpg',
+                    'default_bg.jpg',
+                    'default_emissive.jpg',
+                    'default_fg.jpg',
                     ]
             },
             {
@@ -82,12 +82,12 @@ class PanoIo():
                 'name': 'AJ001-VR1-Interior_Office_',
                 'desc': 'bla bla bla some text to go with the 360 bla bla bla',
                 'pubdate': '04.25.18',
-                'thumb': 'AJ001-VR1-Interior_Office_thumb.jpg',
+                'thumb': 'default_thumb.jpg',
                 'passes': [
-                    'AJ001-VR1-Interior_Office_alpha.jpg',
-                    'AJ001-VR1-Interior_Office_bg.jpg',
-                    'AJ001-VR1-Interior_Office_emission.jpg',
-                    'AJ001-VR1-Interior_Office_fg.jpg',
+                    'default_alpha.jpg',
+                    'default_bg.jpg',
+                    'default_emissive.jpg',
+                    'default_fg.jpg',
                     ]
             },
             {
@@ -95,12 +95,12 @@ class PanoIo():
                 'name': 'AJ001-VR1-Interior_Office_',
                 'desc': 'bla bla bla some text to go with the 360 bla bla bla',
                 'pubdate': '04.25.18',
-                'thumb': 'AJ001-VR1-Interior_Office_thumb.jpg',
+                'thumb': 'default_thumb.jpg',
                 'passes': [
-                    'AJ001-VR1-Interior_Office_alpha.jpg',
-                    'AJ001-VR1-Interior_Office_bg.jpg',
-                    'AJ001-VR1-Interior_Office_emission.jpg',
-                    'AJ001-VR1-Interior_Office_fg.jpg',
+                    'default_alpha.jpg',
+                    'default_bg.jpg',
+                    'default_emissive.jpg',
+                    'default_fg.jpg',
                     ]
             },
             {
@@ -108,12 +108,12 @@ class PanoIo():
                 'name': 'AJ001-VR1-Interior_Office_',
                 'desc': 'bla bla bla some text to go with the 360 bla bla bla',
                 'pubdate': '04.25.18',
-                'thumb': 'AJ001-VR1-Interior_Office_thumb.jpg',
+                'thumb': 'default_thumb.jpg',
                 'passes': [
-                    'AJ001-VR1-Interior_Office_alpha.jpg',
-                    'AJ001-VR1-Interior_Office_bg.jpg',
-                    'AJ001-VR1-Interior_Office_emission.jpg',
-                    'AJ001-VR1-Interior_Office_fg.jpg',
+                    'default_alpha.jpg',
+                    'default_bg.jpg',
+                    'default_emissive.jpg',
+                    'default_fg.jpg',
                     ]
             }
         ]

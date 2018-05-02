@@ -1,11 +1,3 @@
-console.log(FG_IMG)
-console.log(BG_IMG)
-console.log(ALPHA_IMG)
-console.log(EMISSIVE_IMG)
-console.log(THUMB_IMG)
-console.log(FLOORPLAN_IMG)
-console.log(PANO_NAME)
-
 function mat_foreground(manager) {
     var loader = new THREE.TextureLoader(manager);
 

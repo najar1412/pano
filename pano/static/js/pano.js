@@ -13,6 +13,7 @@ var params = {
 
 // CAMERA
 var camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 200);
+camera.rotation.order = 'YXZ';
 camera.position.x = 0;
 camera.position.y = 2;
 camera.position.z = 10;
@@ -52,6 +53,7 @@ composer = composer_passes(renderer, scene, camera, window);
 
 // RENDER LOOP
 function render() {
+    updateRotation();
     requestAnimationFrame(render);
     orbit_controls.update();
     composer.render();
@@ -66,3 +68,23 @@ function onWindowResize() {
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
+
+function updateRotation() {
+    const miniMap = document.getElementById('radar');
+
+    const heading = camera.rotation.y;
+    const radians = heading > 0
+      ? heading
+      : (2 * Math.PI) + heading;
+    const degrees = THREE.Math.radToDeg(radians);
+    const degreesRounded = Math.floor(degrees);
+    $(miniMap).css({
+        'position': 'relative',
+        'bottom': '160px',
+        'left': '80px',
+        'width': '50px',
+        'height': '50px',
+        'transform-origin': 'bottom',
+        'transform': 'rotate(-'+ `${degreesRounded}` +'deg)'
+      });
+  }

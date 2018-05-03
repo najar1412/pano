@@ -145,9 +145,9 @@ def upload_file():
 
 @app.route('/postmethod', methods = ['POST'])
 def get_post_javascript_data():
-    jsdata = request.form.to_dict()
-    print(jsdata)
-    # bla = json.loads(jsdata)[0]
+    # jsdata = request.form.to_dict(flat=False)
+    converted = module.database.js_object(request.form)
+    print(converted)
     return 'one one'
 
 

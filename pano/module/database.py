@@ -5,6 +5,18 @@ import shutil
 import config
 
 
+def js_object(request_form, fieldname='javascript_data'):
+    jsObject = request_form.to_dict(flat=False)
+    print(jsObject)
+    result = {}
+    for k, v in jsObject.items():
+        print(k[14, -1])
+        print(v[0])
+
+
+    return result
+
+
 def dto(
         name=None, desc=None, fg_img=None, alpha_img=None, 
         emissive_img=None, bg_img=None, floorplan_img=None, 

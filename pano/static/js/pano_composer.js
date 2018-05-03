@@ -8,7 +8,7 @@ function composer_passes(renderer, scene, camera, window) {
     rgbShift.uniforms.amount.value = 0;
 
     composer.addPass(renderPass);
-    composer.addPass( bloomPass );
+    // composer.addPass( bloomPass );
     composer.addPass(rgbShift);
     composer.addPass(copyPass);
     copyPass.renderToScreen = true;

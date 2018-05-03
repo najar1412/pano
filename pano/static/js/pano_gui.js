@@ -1,5 +1,3 @@
-console.log(CLASS_ID_FLOORPLAN)
-
 function gui() {
     //GUI
     var gui = new dat.GUI();
@@ -27,23 +25,8 @@ function gui() {
     fg_emissive.onChange(function(value) {
         foreground_mesh.material.emissive.setHex( value.replace("#", "0x") );
     });
-
-    f2.add(params, 'bloomStrength', 0.0, 1.0).onChange(function (value) {
-        bloomPass.strength = Number(value);
-    });
-
-    f2.add(params, 'bloomRadius', 0.0, 2).onChange(function (value) {
-        bloomPass.radius = Number(value);
-    });
-
-    f2.add(params, 'bloomThreshold', 0.0, 1.0).onChange(function (value) {
-        bloomPass.threshold = Number(value);
-    });
-
     
     
-    
-
     f3.add(params, 'CA', false).onChange(function (value) {
         if (value == false) {
             rgbShift.uniforms.amount.value = 0;
@@ -54,6 +37,18 @@ function gui() {
     f3.add(params, 'focalLength', 0.0, 100).onChange(function (value) {
         camera.fov = Number(value);
         camera.updateProjectionMatrix()
+    });
+
+    f3.add(params, 'bloomStrength', 0.0, 1.0).onChange(function (value) {
+        bloomPass.strength = Number(value);
+    });
+
+    f3.add(params, 'bloomRadius', 0.0, 2).onChange(function (value) {
+        bloomPass.radius = Number(value);
+    });
+
+    f3.add(params, 'bloomThreshold', 0.0, 1.0).onChange(function (value) {
+        bloomPass.threshold = Number(value);
     });
 
     f4.add(params, 'enableMinimap', true).onChange(function (value) {
@@ -69,6 +64,9 @@ function gui() {
     });
 
     gui.closed = true;
+
+    // console.log('--------------------------------')
+    // console.log(gui.getSaveObject())
 }
 
 function update() {

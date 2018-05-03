@@ -1,18 +1,22 @@
 // Init Scene, gui params
 var scene = new THREE.Scene({ background: 0xffffff });
-var params = {
+const params = {
     CA: false,
     FGLightMap: 1,
     FGLightMapColor: "#ffffff",
     bg_brightness: 0.3,
     exposure: 2,
-    bloomStrength: 0.0,
+    bloomStrength: 0,
     bloomThreshold: 0,
     bloomRadius: 0,
     focalLength: 50,
     enableMinimap: true,
     fg_alpha: 1
 };
+
+$.post( "/postmethod", {
+    javascript_data: params
+});
 
 // CAMERA
 var camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 200);

@@ -1,5 +1,6 @@
 import os
 import pathlib
+import json
 
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
@@ -140,6 +141,14 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
             return redirect(url_for('index'))
+
+
+@app.route('/postmethod', methods = ['POST'])
+def get_post_javascript_data():
+    jsdata = request.form.to_dict()
+    print(jsdata)
+    # bla = json.loads(jsdata)[0]
+    return 'one one'
 
 
 if __name__ == '__main__':

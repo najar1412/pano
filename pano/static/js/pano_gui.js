@@ -12,6 +12,10 @@ function gui() {
         background_mesh.material.emissiveIntensity = Number(value);
     });
 
+    f2.add(params, 'fg_alpha', 0, 1).onChange(function (value) {
+        background_mesh.material.emissiveIntensity = Number(value);
+    });
+
     f2.add(params, 'exposure', 0, 5).onChange(function (value) {
         light.intensity = Number(value);
     });
@@ -24,15 +28,21 @@ function gui() {
         foreground_mesh.material.emissive.setHex( value.replace("#", "0x") );
     });
 
-    f2.add(params, 'bloomThreshold', 0.0, 1.0).onChange(function (value) {
-        bloomPass.threshold = Number(value);
-    });
-    f2.add(params, 'bloomStrength', 0.0, 3.0).onChange(function (value) {
+    f2.add(params, 'bloomStrength', 0.0, 1.0).onChange(function (value) {
         bloomPass.strength = Number(value);
     });
+
     f2.add(params, 'bloomRadius', 0.0, 2).onChange(function (value) {
         bloomPass.radius = Number(value);
     });
+
+    f2.add(params, 'bloomThreshold', 0.0, 1.0).onChange(function (value) {
+        bloomPass.threshold = Number(value);
+    });
+
+    
+    
+    
 
     f3.add(params, 'CA', false).onChange(function (value) {
         if (value == false) {

@@ -333,7 +333,7 @@ THREE.UnrealBloomPass.prototype = Object.assign( Object.create( THREE.Pass.proto
 				"blurTexture4": { value: null },
 				"blurTexture5": { value: null },
 				"dirtTexture": { value: null },
-				"bloomStrength": { value: 1.0 },
+				"bloomStrength": { value: 0.0 },
 				"bloomFactors": { value: null },
 				"bloomTintColors": { value: null },
 				"bloomRadius": { value: 0.0 }

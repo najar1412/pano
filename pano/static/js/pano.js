@@ -6,11 +6,12 @@ var params = {
     FGLightMapColor: "#ffffff",
     bg_brightness: 0.3,
     exposure: 2,
-    bloomStrength: 0,
+    bloomStrength: 0.0,
     bloomThreshold: 0,
     bloomRadius: 0,
     focalLength: 50,
-    enableMinimap: true
+    enableMinimap: true,
+    fg_alpha: 1
 };
 
 // CAMERA

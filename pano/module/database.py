@@ -6,12 +6,18 @@ import config
 
 
 def js_object(request_form, fieldname='javascript_data'):
+    """ parses javascript object from flask request, 
+    to a dict
+    request_form: object, flask request object from a form post
+    fieldname: str, name of javascript key(?)
+    
+    return: dict
+    """
     jsObject = request_form.to_dict(flat=False)
-    print(jsObject)
     result = {}
+
     for k, v in jsObject.items():
-        print(k[14, -1])
-        print(v[0])
+        result[k[16:-1]] = v[0]
 
 
     return result

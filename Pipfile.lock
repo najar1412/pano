@@ -9,9 +9,9 @@
             "os_name": "posix",
             "platform_machine": "x86_64",
             "platform_python_implementation": "CPython",
-            "platform_release": "4.13.0-38-generic",
+            "platform_release": "4.4.0-122-generic",
             "platform_system": "Linux",
-            "platform_version": "#43-Ubuntu SMP Wed Mar 14 15:20:44 UTC 2018",
+            "platform_version": "#146-Ubuntu SMP Mon Apr 23 15:34:04 UTC 2018",
             "python_full_version": "3.6.3",
             "python_version": "3.6",
             "sys_platform": "linux"
@@ -36,10 +36,10 @@
         },
         "flask": {
             "hashes": [
-                "sha256:dbe2a9f539f4d0fe26fa44c08d6e556e2a4a4dd3a3fb0550f39954cf57571363",
-                "sha256:cfc15b45622f9cfee6b5803723070fd0f489b3bd662179195e702cb95fd924c8"
+                "sha256:a080b744b7e345ccfcbc77954861cb05b3c63786e93f2b3875e0913d44b43f05",
+                "sha256:2271c0070dbcb5275fad4a82e29f23ab92682dc45f9dfbc22c02ba9b9322ce48"
             ],
-            "version": "==1.0.1"
+            "version": "==1.0.2"
         },
         "flask-sqlalchemy": {
             "hashes": [

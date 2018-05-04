@@ -11,6 +11,9 @@
         <div class="card-body">
           <h5 class="card-title">{{pano.name}}</h5>
           <p class="card-text">{{pano.desc}}</p>
+          <a href="{{url_for('pano', id=pano.id)}}" class="btn btn-primary">edit</a> 
+          <a href="{{url_for('pano', id=pano.id)}}" class="btn btn-primary">publish</a> 
+          <p style="height:2px;"></p>
           <a href="{{url_for('pano', id=pano.id)}}" class="btn btn-primary">low</a> 
           <a href="{{url_for('pano', id=pano.id)}}" class="btn btn-primary">mid</a> 
           <a href="{{url_for('pano', id=pano.id)}}" class="btn btn-primary">high</a>

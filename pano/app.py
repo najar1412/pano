@@ -145,8 +145,27 @@ def upload_file():
 
 @app.route('/postmethod', methods = ['POST'])
 def get_post_javascript_data():
-    converted = module.database.js_object(request.form)
-    print(converted)
+    # converted = module.database.js_object(request.form)
+    # print(converted)
+
+    pano_id = 1
+
+    clone_data = {
+        'CA': 'false', 
+        'FGLightMap': '1', 
+        'FGLightMapColor': '#ffffff', 
+        'bg_brightness': '0.3', 
+        'exposure': '2', 
+        'bloomStrength': '0', 
+        'bloomThreshold': '0', 
+        'bloomRadius': '0', 
+        'focalLength': '50', 
+        'enableMinimap': 'true', 
+        'fg_alpha': '1'
+    }
+
+    module.database.PanoOption().new(pano_id, clone_data)
+
     return 'one one'
 
 

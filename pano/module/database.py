@@ -10,7 +10,7 @@ def js_object(request_form, fieldname='javascript_data'):
     to a dict
     request_form: object, flask request object from a form post
     fieldname: str, name of javascript key(?)
-    
+
     return: dict
     """
     jsObject = request_form.to_dict(flat=False)
@@ -34,6 +34,25 @@ def dto(
     pano = data(name, desc, fg_img, alpha_img, emissive_img, bg_img, floorplan_img, thumb_img)
 
     return pano
+
+
+class PanoOption():
+    def new(self, pano_id, params):
+        validate_params = params
+        add_to_database = validate_params
+
+        return add_to_database
+
+
+    def get_by_id(self, option_id):
+        get_from_database = option_id
+
+        return get_from_database
+
+
+    def __repr__(self):
+        return '<PanoOption:>'
+
 
 
 class Pano():

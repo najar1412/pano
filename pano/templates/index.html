@@ -3,27 +3,71 @@
 
 
 <div style="display:flex;">
-{% for pano in test %}
+{% for pano in panos %}
 
-<div class="card" style="width: 18rem;">
+<div class="card">
     
-        <img class="card-img-top" src="/static/pano/{{pano.name}}/{{pano.thumb_img}}" alt="Card image cap">
+        <img class="card-img-top" src="/static/pano/{{pano.name}}/{{pano.thumb_img}}">
         <div class="card-body">
           <h5 class="card-title">{{pano.name}}</h5>
           <p class="card-text">{{pano.desc}}</p>
-          <a href="{{url_for('pano', id=pano.id)}}" class="btn btn-primary">edit</a> 
-          <a href="{{url_for('pano', id=pano.id)}}" class="btn btn-primary">publish</a> 
-          <p style="height:2px;"></p>
-          <a href="{{url_for('pano', id=pano.id)}}" class="btn btn-primary">low</a> 
-          <a href="{{url_for('pano', id=pano.id)}}" class="btn btn-primary">mid</a> 
-          <a href="{{url_for('pano', id=pano.id)}}" class="btn btn-primary">high</a>
-          <a href="{{url_for('pano_delete', id=pano.id)}}" class="btn btn-danger">del</a>
+        
+
+           <form class="form-inline">
+
+
+              <table class="table table-hover table-sm">
+                  <thead>
+                    <tr>
+                      <th scope="col">opt.</th>
+                      <th scope="col">Edit</th>
+                      <th scope="col">publish</th>
+                      <th scope="col">delete (opt.)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+              
+
+                      {% for option in options %}
+                      {% if option.pano_id == pano.id %}
+                    
+                    <tr>
+                      <td>{{option.id}}</td>
+                        <td><a href="{{url_for('pano', id=pano.id)}}" class="btn btn-primary btn-sm">edit</a></td>
+                          <td><a href="{{url_for('pano', id=pano.id)}}" class="btn btn-primary btn-sm">publish</a> </td>
+                          <td><a href="{{url_for('pano', id=pano.id)}}" class="btn btn-danger btn-sm">delete</a> </td>
+                    </tr>
+              
+
+
+                    {% endif %}
+                    {% endfor %}
+              
+                  </tbody>
+                </table>
+
+
+
+
+
+
+
+
+
+
+
+          </form>
+          <a style="display:block" href="{{url_for('pano_delete', id=pano.id)}}" class="btn btn-danger btn-sm">Delete Pano</a>
         </div>
       </div>
 
 {% endfor %}
 </div>
 
+
+{% for option in options %}
+{{option}}
+{% endfor %}
 
 
 {% endblock %}

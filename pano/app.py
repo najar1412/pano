@@ -60,16 +60,17 @@ db.create_all()
 
 @app.route('/')
 def index():
-    test = module.database.Pano(model=Pano).get_all()
+    panos = module.database.Pano(model=Pano).get_all()
+    options = module.database.PanoOption(model=PanoOption).get_all()
 
 
-    return render_template('index.html', test=test)
+    return render_template('index.html', panos=panos, options=options)
 
 
 @app.route('/pano/<int:id>')
 def pano(id):
-    # pano = pano_io.PanoDb().get(id)
     test = module.database.Pano(model=Pano).get_by_id(id)
+
 
     return render_template('pano.html', test=test)
 

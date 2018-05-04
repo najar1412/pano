@@ -57,6 +57,24 @@ class PanoOption():
         self.model = model
 
 
+    def _to_dict(self, row):
+        return {
+            'id': row.id,
+            'CA': row.CA,
+            'FGLightMap': row.FGLightMap,
+            'FGLightMapColor': row.FGLightMapColor,
+            'bg_brightness': row.bg_brightness,
+            'exposure': row.exposure,
+            'bloomStrength': row.bloomStrength,
+            'bloomThreshold': row.bloomThreshold,
+            'bloomRadius': row.bloomRadius,
+            'focalLength': row.focalLength,
+            'enableMinimap': row.enableMinimap,
+            'fg_alpha': row.fg_alpha,
+            'pano_id': row.pano_id
+        }
+
+
     def new(self, pano_id, pano_option_dto):
         pano_options = self.model(
             CA = pano_option_dto.CA,
@@ -80,9 +98,15 @@ class PanoOption():
 
 
     def get_by_id(self, option_id):
-        get_from_database = option_id
+        return self._to_dict(self.model.query.filter_by(id=id).first())
 
-        return get_from_database
+
+    def get_all(self):
+        result = []
+        for panoOption in self.model.query.all():
+            result.append(self._to_dict(panoOption))
+
+        return result
 
 
 class Pano():

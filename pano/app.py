@@ -28,27 +28,51 @@ class Pano(db.Model):
     floorplan_img = db.Column(db.String)
     thumb_img = db.Column(db.String)
 
+    options = db.relationship('PanoOption', backref='pano', lazy=True)
+
     def __repr__(self):
         return f'<Pano: {self.name}>'
+
+
+class PanoOption(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    CA = db.Column(db.String)
+    FGLightMap = db.Column(db.String)
+    FGLightMapColor = db.Column(db.String)
+    bg_brightness = db.Column(db.String)
+    exposure = db.Column(db.String)
+    bloomStrength = db.Column(db.String)
+    bloomThreshold = db.Column(db.String)
+    bloomRadius = db.Column(db.String)
+    focalLength = db.Column(db.String)
+    enableMinimap = db.Column(db.String)
+    fg_alpha = db.Column(db.String)
+
+    pano_id = db.Column(db.Integer, db.ForeignKey('pano.id'),
+        nullable=False)
+
+
+    def __repr__(self):
+        return f'<PanoOption: {self.id}>'
 
 
 db.create_all()
 
 @app.route('/')
 def index():
-    panos = pano_io.PanoIo().get_all_from_server()
     test = module.database.Pano(model=Pano).get_all()
 
 
-    return render_template('index.html', panos=panos, test=test)
+    return render_template('index.html', test=test)
 
 
 @app.route('/pano/<int:id>')
 def pano(id):
-    pano = pano_io.PanoDb().get(1)
+    # pano = pano_io.PanoDb().get(id)
     test = module.database.Pano(model=Pano).get_by_id(id)
 
-    return render_template('pano.html', pano=pano, test=test)
+    return render_template('pano.html', test=test)
+
 
 @app.route('/pano/delete/<int:id>')
 def pano_delete(id):
@@ -127,7 +151,6 @@ def allowed_file(filename):
 
 @app.route('/upload_file', methods=['GET', 'POST'])
 def upload_file():
-    
     if request.method == 'POST':
         if 'file' not in request.files:
             return redirect(request.url)
@@ -145,10 +168,7 @@ def upload_file():
 
 @app.route('/postmethod', methods = ['POST'])
 def get_post_javascript_data():
-    # converted = module.database.js_object(request.form)
-    # print(converted)
-
-    pano_id = 1
+    converted = module.database.js_object(request.form)
 
     clone_data = {
         'CA': 'false', 
@@ -161,10 +181,28 @@ def get_post_javascript_data():
         'bloomRadius': '0', 
         'focalLength': '50', 
         'enableMinimap': 'true', 
-        'fg_alpha': '1'
+        'fg_alpha': '1',
+        'pano_id': '1'
     }
 
-    module.database.PanoOption().new(pano_id, clone_data)
+    pano_option_dto = module.database.pano_option_dto(
+        CA = converted['CA'],
+        FGLightMap = converted['FGLightMap'],
+        FGLightMapColor = converted['FGLightMapColor'],
+        bg_brightness = converted['bg_brightness'],
+        exposure = converted['exposure'],
+        bloomStrength = converted['bloomStrength'],
+        bloomThreshold = converted['bloomThreshold'],
+        bloomRadius = converted['bloomRadius'],
+        focalLength = converted['focalLength'],
+        enableMinimap = converted['enableMinimap'],
+        fg_alpha = converted['fg_alpha'],
+        pano_id = converted['pano_id']
+    )
+
+    module.database.PanoOption(db=db, model=PanoOption).new(pano_option_dto.pano_id, pano_option_dto)
+
+    print('POSTING!!!!')
 
     return 'one one'
 

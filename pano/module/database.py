@@ -36,12 +36,47 @@ def dto(
     return pano
 
 
-class PanoOption():
-    def new(self, pano_id, params):
-        validate_params = params
-        add_to_database = validate_params
+def pano_option_dto(
+        CA='', FGLightMap='', FGLightMapColor='', bg_brightness='', 
+        exposure='', bloomStrength='', bloomThreshold='', 
+        bloomRadius='', focalLength='', enableMinimap='', fg_alpha='', pano_id=''
+    ):
+    data = namedtuple(
+        'pano', 'CA, FGLightMap, FGLightMapColor, bg_brightness, exposure, bloomStrength, bloomThreshold, bloomRadius, focalLength, enableMinimap, fg_alpha, pano_id'
+    )
+    data.__new__.__defaults__ = ('',) * len(data._fields)
 
-        return add_to_database
+    pano_option = data(CA, FGLightMap, FGLightMapColor, bg_brightness, exposure, bloomStrength, bloomThreshold, bloomRadius, focalLength, enableMinimap, fg_alpha, pano_id)
+
+    return pano_option
+
+
+class PanoOption():
+    def __init__(self, db=None, model=None):
+        self.db = db
+        self.model = model
+
+
+    def new(self, pano_id, pano_option_dto):
+        pano_options = self.model(
+            CA = pano_option_dto.CA,
+            FGLightMap = pano_option_dto.FGLightMap,
+            FGLightMapColor = pano_option_dto.FGLightMapColor,
+            bg_brightness = pano_option_dto.bg_brightness,
+            exposure = pano_option_dto.exposure,
+            bloomStrength = pano_option_dto.bloomStrength,
+            bloomThreshold = pano_option_dto.bloomThreshold,
+            bloomRadius = pano_option_dto.bloomRadius,
+            focalLength = pano_option_dto.focalLength,
+            enableMinimap = pano_option_dto.enableMinimap,
+            fg_alpha = pano_option_dto.fg_alpha,
+            pano_id = pano_option_dto.pano_id
+        )
+
+        self.db.session.add(pano_options)
+        self.db.session.commit()
+
+        return pano_options
 
 
     def get_by_id(self, option_id):
@@ -50,15 +85,11 @@ class PanoOption():
         return get_from_database
 
 
-    def __repr__(self):
-        return '<PanoOption:>'
-
-
-
 class Pano():
     def __init__(self, db=None, model=None):
         self.db = db
         self.model = model
+
 
     def _to_dict(self, row):
         return {
@@ -105,7 +136,6 @@ class Pano():
 
         return True
         
-
 
     def get_by_id(self, id):
         return self._to_dict(self.model.query.filter_by(id=id).first())

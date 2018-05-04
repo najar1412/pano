@@ -1,5 +1,7 @@
 // Init Scene, gui params
 var scene = new THREE.Scene({ background: 0xffffff });
+// var pano_id = '{{ test.id | tojson | safe }}';
+// var pano_id = JSON.parse(document.getElementById("pano_id").dataset.panoid);
 const params = {
     CA: false,
     FGLightMap: 1,
@@ -11,12 +13,15 @@ const params = {
     bloomRadius: 0,
     focalLength: 50,
     enableMinimap: true,
-    fg_alpha: 1
+    fg_alpha: 1,
+    pano_id: pano_id_from_jinja
 };
 
-$.post( "/postmethod", {
-    javascript_data: params
-});
+function postOption() {
+    $.post( "/postmethod", {
+        javascript_data: params
+    });
+}
 
 // CAMERA
 var camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 200);

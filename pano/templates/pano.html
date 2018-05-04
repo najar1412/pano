@@ -32,6 +32,8 @@
 
 <body>
 
+		
+
 	<!--
 	<div class="sk-folding-cube">
 		<div class="sk-cube1 sk-cube"></div>
@@ -40,6 +42,14 @@
 		<div class="sk-cube3 sk-cube"></div>
 	  </div>
 -->
+
+<div id="pano_id" data-panoid="{{ test.id|tojson }}"></div>
+<script>
+var pano_id_from_jinja = JSON.parse(document.getElementById("pano_id").dataset.panoid);
+</script>
+
+<input id="clickMe" type="button" value="clickme" onclick="postOption();" />
+
 
 			<div id='overlay'></div>
 
@@ -101,8 +111,7 @@
 
 
 <script>
-window.onload = function () { 
-	// alert("It's loaded!")
+window.onload = function () {
 	$("#overlay").fadeOut(100);
 }
 </script>

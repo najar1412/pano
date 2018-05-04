@@ -64,9 +64,6 @@ function gui() {
     });
 
     gui.closed = true;
-
-    // console.log('--------------------------------')
-    // console.log(gui.getSaveObject())
 }
 
 function update() {

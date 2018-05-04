@@ -69,10 +69,10 @@ def index():
 
 @app.route('/pano/<int:id>')
 def pano(id):
-    test = module.database.Pano(model=Pano).get_by_id(id)
+    pano = module.database.Pano(model=Pano).get_by_id(id)
 
 
-    return render_template('pano.html', test=test)
+    return render_template('pano.html', pano=pano)
 
 
 @app.route('/pano/delete/<int:id>')
@@ -203,7 +203,7 @@ def get_post_javascript_data():
 
     module.database.PanoOption(db=db, model=PanoOption).new(pano_option_dto.pano_id, pano_option_dto)
 
-    print('POSTING!!!!')
+    print('Posting new Option')
 
     return 'one one'
 
@@ -214,6 +214,24 @@ def delete_option(id):
 
 
     return redirect(url_for('index'))
+
+
+@app.route('/edit/pano/<int:pano_id>/<int:option_id>')
+def pano_edit(pano_id, option_id):
+    print('---------------------')
+    print(pano_id)
+    print(type(pano_id))
+    print(option_id)
+    print(type(option_id))
+    pano = module.database.Pano(model=Pano).get_by_id(pano_id)
+    pano_option = module.database.PanoOption(model=PanoOption).get_by_id(option_id)
+    print(':::::::::::::::')
+    print(pano)
+    print(':::::::::::::::')
+    print(pano_option)
+
+
+    return render_template('pano.html', pano=pano)
 
 
 

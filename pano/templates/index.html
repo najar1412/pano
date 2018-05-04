@@ -38,7 +38,7 @@
                     
                     <tr>
                       <td>{{option.id}}</td>
-                        <td><a href="{{url_for('pano', id=pano.id)}}" class="btn btn-primary btn-sm">edit</a></td>
+                        <td><a href="{{url_for('pano_edit', pano_id=option.pano_id, option_id=option.id)}}" class="btn btn-primary btn-sm">edit</a></td>
                           <td><a href="{{url_for('pano', id=pano.id)}}" class="btn btn-primary btn-sm">publish</a> </td>
                           <td><a href="{{url_for('delete_option', id=option.id)}}" class="btn btn-outline-danger btn-sm">delete</a> </td>
                     </tr>

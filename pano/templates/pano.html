@@ -41,7 +41,7 @@
 	  </div>
 -->
 
-<div id="pano_id" data-panoid="{{ test.id|tojson }}"></div>
+<div id="pano_id" data-panoid="{{ pano.id|tojson }}"></div>
 <script>
 var pano_id_from_jinja = JSON.parse(document.getElementById("pano_id").dataset.panoid);
 </script>
@@ -83,13 +83,13 @@ var pano_id_from_jinja = JSON.parse(document.getElementById("pano_id").dataset.p
 	<div id="container"></div>
 
 	<script>
-	const FG_IMG = '{{test.fg_img}}'
-	const BG_IMG = '{{test.bg_img}}'
-	const ALPHA_IMG = '{{test.alpha_img}}'
-	const EMISSIVE_IMG = '{{test.emissive_img}}'
-	const THUMB_IMG = '{{test.thumb_img}}'
-	const FLOORPLAN_IMG = '{{test.floorplan_img}}'
-	const PANO_NAME = '{{test.name}}'
+	const FG_IMG = '{{pano.fg_img}}'
+	const BG_IMG = '{{pano.bg_img}}'
+	const ALPHA_IMG = '{{pano.alpha_img}}'
+	const EMISSIVE_IMG = '{{pano.emissive_img}}'
+	const THUMB_IMG = '{{pano.thumb_img}}'
+	const FLOORPLAN_IMG = '{{pano.floorplan_img}}'
+	const PANO_NAME = '{{pano.name}}'
 
 	const CLASS_ID_FLOORPLAN = document.getElementsByClassName("floorplan");
 	</script>

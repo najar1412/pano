@@ -9,8 +9,13 @@
     
         <img class="card-img-top" src="/static/pano/{{pano.name}}/{{pano.thumb_img}}">
         <div class="card-body">
-          <h5 class="card-title">{{pano.name}}</h5>
-          <p class="card-text">{{pano.desc}}</p>
+          <h5 class="card-title"><a href="{{url_for('pano', id=pano.id)}}">{{pano.name}}</a></h5>
+          <p class="card-text">
+            {{pano.desc}}
+            <p style="height:1px;"></p>
+            <small>[Client name]</small><br>
+            <small>[Project name]</small>
+          </p>
         
 
            <form class="form-inline">
@@ -35,29 +40,18 @@
                       <td>{{option.id}}</td>
                         <td><a href="{{url_for('pano', id=pano.id)}}" class="btn btn-primary btn-sm">edit</a></td>
                           <td><a href="{{url_for('pano', id=pano.id)}}" class="btn btn-primary btn-sm">publish</a> </td>
-                          <td><a href="{{url_for('pano', id=pano.id)}}" class="btn btn-danger btn-sm">delete</a> </td>
+                          <td><a href="{{url_for('delete_option', id=option.id)}}" class="btn btn-outline-danger btn-sm">delete</a> </td>
                     </tr>
-              
-
-
                     {% endif %}
                     {% endfor %}
+   
               
                   </tbody>
                 </table>
 
 
-
-
-
-
-
-
-
-
-
           </form>
-          <a style="display:block" href="{{url_for('pano_delete', id=pano.id)}}" class="btn btn-danger btn-sm">Delete Pano</a>
+          <a style="display:block" href="{{url_for('pano_delete', id=pano.id)}}" class="btn btn-outline-danger btn-sm">Delete Pano</a>
         </div>
       </div>
 
@@ -67,6 +61,7 @@
 
 {% for option in options %}
 {{option}}
+<br><br>
 {% endfor %}
 
 

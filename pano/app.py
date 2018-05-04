@@ -208,5 +208,15 @@ def get_post_javascript_data():
     return 'one one'
 
 
+@app.route('/delete_option/<int:id>')
+def delete_option(id):
+    module.database.PanoOption(db=db, model=PanoOption).delete(id)
+
+
+    return redirect(url_for('index'))
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

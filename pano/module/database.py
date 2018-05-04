@@ -108,6 +108,15 @@ class PanoOption():
 
         return result
 
+    def delete(self, id):
+        pano_option = self.model.query.filter_by(id=id).first()
+
+    
+        self.db.session.delete(pano_option)
+        self.db.session.commit()
+
+        return True
+
 
 class Pano():
     def __init__(self, db=None, model=None):

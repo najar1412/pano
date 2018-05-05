@@ -30,6 +30,7 @@ class Pano(db.Model):
 
     options = db.relationship('PanoOption', backref='pano', lazy=True)
 
+
     def __repr__(self):
         return f'<Pano: {self.name}>'
 

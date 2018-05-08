@@ -59,8 +59,6 @@ var pano_id_from_jinja = JSON.parse(document.getElementById("pano_id").dataset.p
 
 	function getPanoParams() {
 		if (pano_option != 0) {
-			console.log('ITS UNDEFINED!!!!!1')
-
 			return ({{ pano_option|tojson|safe }});
 
 		} else {
@@ -80,7 +78,7 @@ var pano_id_from_jinja = JSON.parse(document.getElementById("pano_id").dataset.p
 				pano_id: pano_id_from_jinja
 			};
 
-			return params;
+			return default_settings;
 		};
 	};
 	

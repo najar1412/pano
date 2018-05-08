@@ -40,13 +40,29 @@ scene.add(foreground_mesh);
 scene.add(background_mesh);
 
 // lighting_env
-var light = new THREE.AmbientLight(0xffffff, 2); // soft white light
-light.intensity = Number(params['exposure']);
+var light = new THREE.AmbientLight(0xffffff, 2);
 
 scene.add(light);
 
 // Effect Composer
 composer = composer_passes(renderer, scene, camera, window);
+
+function setDatGuiState(params) {
+    background_mesh.material.emissiveIntensity = params['bg_brightness'];
+    background_mesh.material.emissiveIntensity = params['fg_alpha'];
+    light.intensity = params['exposure'];
+    foreground_mesh.material.emissiveIntensity = params['FGLightMap'];
+    foreground_mesh.material.emissive.setHex( params['FGLightMapColor'].replace("#", "0x") );
+
+    camera.fov = params['focalLength'];
+    camera.updateProjectionMatrix()
+
+    bloomPass.strength = params['bloomStrength'];
+    bloomPass.radius = params['bloomRadius'];
+    bloomPass.threshold = params['bloomThreshold'];
+}
+
+setDatGuiState(params);
 
 // RENDER LOOP
 function render() {

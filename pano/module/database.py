@@ -23,11 +23,9 @@ def js_object(request_form, fieldname='javascript_data'):
     return result
 
 
-def dto(
-        name=None, desc=None, fg_img=None, alpha_img=None, 
+def dto(name=None, desc=None, fg_img=None, alpha_img=None, 
         emissive_img=None, bg_img=None, floorplan_img=None, 
-        thumb_img=None
-    ):
+        thumb_img=None):
     data = namedtuple('pano', 'name, desc, fg_img, alpha_img, emissive_img, bg_img, floorplan_img, thumb_img')
     data.__new__.__defaults__ = (None,) * len(data._fields)
 
@@ -98,7 +96,7 @@ class PanoOption():
 
 
     def get_by_id(self, option_id):
-        return self._to_dict(self.model.query.filter_by(id=id).first())
+        return self._to_dict(self.model.query.filter_by(id=option_id).first())
 
 
     def get_all(self):

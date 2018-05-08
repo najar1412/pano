@@ -30,6 +30,12 @@
 
 <body>
 
+
+{{pano_option}}
+
+<script type=text/javascript>
+	var pano_option = ({{ pano_option|tojson|safe }});
+</script>
 		
 
 	<!--
@@ -42,9 +48,49 @@
 -->
 
 <div id="pano_id" data-panoid="{{ pano.id|tojson }}"></div>
+
 <script>
 var pano_id_from_jinja = JSON.parse(document.getElementById("pano_id").dataset.panoid);
 </script>
+
+
+
+<script type=text/javascript>
+
+	function getPanoParams() {
+		if (pano_option != 0) {
+			console.log('ITS UNDEFINED!!!!!1')
+
+			return ({{ pano_option|tojson|safe }});
+
+		} else {
+
+			const default_settings = {
+				CA: false,
+				FGLightMap: 1,
+				FGLightMapColor: "#ffffff",
+				bg_brightness: 0.3,
+				exposure: 0,
+				bloomStrength: 0,
+				bloomThreshold: 0,
+				bloomRadius: 0,
+				focalLength: 50,
+				enableMinimap: true,
+				fg_alpha: 1,
+				pano_id: pano_id_from_jinja
+			};
+
+			return params;
+		};
+	};
+	
+</script>
+
+<script>
+params = getPanoParams();
+</script>
+
+
 
 <input id="clickMe" type="button" value="clickme" onclick="postOption();" />
 
@@ -94,17 +140,23 @@ var pano_id_from_jinja = JSON.parse(document.getElementById("pano_id").dataset.p
 	const CLASS_ID_FLOORPLAN = document.getElementsByClassName("floorplan");
 	</script>
 
+<script src="/static/js/pano_gui.js"></script>
 	<script src="/static/js/pano_LoadingManager.js"></script>
 	<script src="/static/js/pano_orbitcontrols.js"></script>
 	<script src="/static/js/pano_materials.js"></script>
 	<script src="/static/js/pano_composer.js"></script>
-	<script src="/static/js/pano_gui.js"></script>
 	<script src="/static/js/pano_loading.js"></script>
 	<script src="/static/js/pano.js"></script>
 
+
 	<script>
-	console.log(params.FGLightMapColor);
+	
+	// gui
+	gui();
+	update();
+	
 	</script>
+	
 
 
 

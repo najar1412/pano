@@ -64,6 +64,7 @@ function gui() {
     });
 
     gui.closed = true;
+    
 }
 
 function update() {

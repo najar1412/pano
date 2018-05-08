@@ -2,20 +2,7 @@
 var scene = new THREE.Scene({ background: 0xffffff });
 // var pano_id = '{{ test.id | tojson | safe }}';
 // var pano_id = JSON.parse(document.getElementById("pano_id").dataset.panoid);
-const params = {
-    CA: false,
-    FGLightMap: 1,
-    FGLightMapColor: "#ffffff",
-    bg_brightness: 0.3,
-    exposure: 2,
-    bloomStrength: 0,
-    bloomThreshold: 0,
-    bloomRadius: 0,
-    focalLength: 50,
-    enableMinimap: true,
-    fg_alpha: 1,
-    pano_id: pano_id_from_jinja
-};
+
 
 function postOption() {
     $.post( "/postmethod", {
@@ -54,11 +41,9 @@ scene.add(background_mesh);
 
 // lighting_env
 var light = new THREE.AmbientLight(0xffffff, 2); // soft white light
-scene.add(light);
+light.intensity = Number(params['exposure']);
 
-// gui
-gui()
-update();
+scene.add(light);
 
 // Effect Composer
 composer = composer_passes(renderer, scene, camera, window);

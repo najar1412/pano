@@ -1,6 +1,5 @@
 import os
 import pathlib
-import json
 
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
@@ -72,13 +71,15 @@ def index():
 def pano(id):
     pano = module.database.Pano(model=Pano).get_by_id(id)
 
+    pano_option = 0
 
-    return render_template('pano.html', pano=pano)
+    return render_template('pano.html', pano=pano, pano_option=pano_option)
 
 
 @app.route('/pano/delete/<int:id>')
 def pano_delete(id):
     deleting_pano = module.database.Pano(db=db, model=Pano).delete(id)
+
     if deleting_pano:
         print('items deleted')
     else:
@@ -172,21 +173,6 @@ def upload_file():
 def get_post_javascript_data():
     converted = module.database.js_object(request.form)
 
-    clone_data = {
-        'CA': 'false', 
-        'FGLightMap': '1', 
-        'FGLightMapColor': '#ffffff', 
-        'bg_brightness': '0.3', 
-        'exposure': '2', 
-        'bloomStrength': '0', 
-        'bloomThreshold': '0', 
-        'bloomRadius': '0', 
-        'focalLength': '50', 
-        'enableMinimap': 'true', 
-        'fg_alpha': '1',
-        'pano_id': '1'
-    }
-
     pano_option_dto = module.database.pano_option_dto(
         CA = converted['CA'],
         FGLightMap = converted['FGLightMap'],
@@ -219,20 +205,10 @@ def delete_option(id):
 
 @app.route('/edit/pano/<int:pano_id>/<int:option_id>')
 def pano_edit(pano_id, option_id):
-    print('---------------------')
-    print(pano_id)
-    print(type(pano_id))
-    print(option_id)
-    print(type(option_id))
     pano = module.database.Pano(model=Pano).get_by_id(pano_id)
     pano_option = module.database.PanoOption(model=PanoOption).get_by_id(option_id)
-    print(':::::::::::::::')
-    print(pano)
-    print(':::::::::::::::')
-    print(pano_option)
 
-
-    return render_template('pano.html', pano=pano)
+    return render_template('pano.html', pano=pano, pano_option=pano_option)
 
 
 

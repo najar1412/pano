@@ -1,4 +1,5 @@
 function mat_foreground(manager) {
+    console.log(params)
     var loader = new THREE.TextureLoader(manager);
 
 

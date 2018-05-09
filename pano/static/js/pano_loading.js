@@ -1,7 +1,5 @@
-//to display loading animation before it's ready
 $(document).ready(function () {
     if ($('.loading-container').length) {
-
         // to show loading animation
         $imgloader = $('.loading-container');
         $loadingimg = $('<div id="canvasloader-container" class="onepix-imgloader"></div>');

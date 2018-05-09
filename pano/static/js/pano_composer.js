@@ -1,4 +1,6 @@
 function composer_passes(renderer, scene, camera, window) {
+    // adds all passes to composer
+    // return: composer object
     composer = new THREE.EffectComposer(renderer);
 
     renderPass = new THREE.RenderPass(scene, camera);

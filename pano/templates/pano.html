@@ -74,24 +74,12 @@
 </script>
 
 
-<!--
-	<div class="sk-folding-cube">
-		<div class="sk-cube1 sk-cube"></div>
-		<div class="sk-cube2 sk-cube"></div>
-		<div class="sk-cube4 sk-cube"></div>
-		<div class="sk-cube3 sk-cube"></div>
-	  </div>
--->
-
-
 
 	<input id="clickMe" type="button" value="clickme" onclick="postOption();" />
 
 
-	<div id='overlay'></div>
+	<div id='init-fade'></div>
 
-
-	<div id="contenty"></div>
 
 	<div class="loading-container">
 		<div id="container">
@@ -119,7 +107,7 @@
 
 
 
-	<div id="container"></div>
+	<div id="threejs-container"></div>
 
 
 
@@ -136,7 +124,7 @@
 
 		// gui
 		gui();
-		update();
+		guiEmissiveColorUpdate();
 
 	</script>
 
@@ -145,7 +133,7 @@
 
 	<script>
 		window.onload = function () {
-			$("#overlay").fadeOut(100);
+			$("#init-fade").fadeOut(100);
 		}
 	</script>
 

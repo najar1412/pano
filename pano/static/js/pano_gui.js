@@ -1,5 +1,5 @@
 function gui() {
-    //GUI
+    //init dat.gui options
     var gui = new dat.GUI();
     var f1 = gui.addFolder('Background');
     var f2 = gui.addFolder('Foreground');
@@ -67,7 +67,9 @@ function gui() {
     
 }
 
-function update() {
+function guiEmissiveColorUpdate() {
+    // update emissive color
+    // does this need to a function?
     foreground_geo.material = new THREE.MeshStandardMaterial({color: 0x000000})
     foreground_geo.material.emissive.setHex(params.FGLightMapColor.replace("#", "0x"))
 };

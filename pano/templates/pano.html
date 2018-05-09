@@ -30,15 +30,51 @@
 
 <body>
 
+	<script type=text/javascript>
+		var pano_option = ({{ pano_option|tojson|safe }});
+		var pano_id_from_jinja = ({{ pano.id|tojson|safe }});
+		const FG_IMG = '{{pano.fg_img}}'
+		const BG_IMG = '{{pano.bg_img}}'
+		const ALPHA_IMG = '{{pano.alpha_img}}'
+		const EMISSIVE_IMG = '{{pano.emissive_img}}'
+		const THUMB_IMG = '{{pano.thumb_img}}'
+		const FLOORPLAN_IMG = '{{pano.floorplan_img}}'
+		const PANO_NAME = '{{pano.name}}'
+		const CLASS_ID_FLOORPLAN = document.getElementsByClassName("floorplan");
 
-{{pano_option}}
+		function getPanoParams() {
+			// processes pano state if available
+			// return json
+			if (pano_option != 0) {
+				return ({{ pano_option|tojson|safe }});
 
-<script type=text/javascript>
-	var pano_option = ({{ pano_option|tojson|safe }});
+			} else {
+
+				const default_settings = {
+					CA: false,
+					FGLightMap: 0.5,
+					FGLightMapColor: "#ffffff",
+					bg_brightness: 0.45,
+					exposure: 1.8,
+					bloomStrength: 0,
+					bloomThreshold: 0,
+					bloomRadius: 0,
+					focalLength: 50,
+					enableMinimap: true,
+					fg_alpha: 0,
+					pano_id: pano_id_from_jinja
+				};
+
+				return default_settings;
+			};
+		};
+
+		params = getPanoParams();
+
 </script>
-		
 
-	<!--
+
+<!--
 	<div class="sk-folding-cube">
 		<div class="sk-cube1 sk-cube"></div>
 		<div class="sk-cube2 sk-cube"></div>
@@ -47,65 +83,28 @@
 	  </div>
 -->
 
-<div id="pano_id" data-panoid="{{ pano.id|tojson }}"></div>
-
-<script>
-var pano_id_from_jinja = JSON.parse(document.getElementById("pano_id").dataset.panoid);
-</script>
 
 
-
-<script type=text/javascript>
-
-	function getPanoParams() {
-		if (pano_option != 0) {
-			return ({{ pano_option|tojson|safe }});
-
-		} else {
-
-			const default_settings = {
-				CA: false,
-				FGLightMap: 1,
-				FGLightMapColor: "#ffffff",
-				bg_brightness: 0.3,
-				exposure: 0,
-				bloomStrength: 0,
-				bloomThreshold: 0,
-				bloomRadius: 0,
-				focalLength: 50,
-				enableMinimap: true,
-				fg_alpha: 1,
-				pano_id: pano_id_from_jinja
-			};
-
-			return default_settings;
-		};
-	};
-	
-</script>
-
-<script>
-params = getPanoParams();
-</script>
+	<input id="clickMe" type="button" value="clickme" onclick="postOption();" />
 
 
-
-<input id="clickMe" type="button" value="clickme" onclick="postOption();" />
-
-
-			<div id='overlay'></div>
+	<div id='overlay'></div>
 
 
+	<div id="contenty"></div>
 
+	<div class="loading-container">
+		<div id="container">
 
-		<div id="contenty"></div>
+		</div>
+	</div>
 
 	<div class="floorplan">
 		<img style="border: 1px solid;box-shadow: 5px 5px 5px #0000002c;width:100%; height:100%;" src="{{ url_for('static', filename='pano/default/default_floorplan.jpg') }}">
 		<div id="radar">
-		<img style="width:50px; height: 50px;" src="{{url_for('static', filename='img/fov_icon.png')}}">
-	</div>
+			<img style="width:50px; height: 50px;" src="{{url_for('static', filename='img/fov_icon.png')}}">
 		</div>
+	</div>
 
 
 	<div class="copyright">
@@ -118,27 +117,13 @@ params = getPanoParams();
 		visualhouse
 	</div>
 
-	<div class="loading-container">
-		<div id="container">
-	
-		</div>
-	</div>
+
 
 	<div id="container"></div>
 
-	<script>
-	const FG_IMG = '{{pano.fg_img}}'
-	const BG_IMG = '{{pano.bg_img}}'
-	const ALPHA_IMG = '{{pano.alpha_img}}'
-	const EMISSIVE_IMG = '{{pano.emissive_img}}'
-	const THUMB_IMG = '{{pano.thumb_img}}'
-	const FLOORPLAN_IMG = '{{pano.floorplan_img}}'
-	const PANO_NAME = '{{pano.name}}'
 
-	const CLASS_ID_FLOORPLAN = document.getElementsByClassName("floorplan");
-	</script>
 
-<script src="/static/js/pano_gui.js"></script>
+	<script src="/static/js/pano_gui.js"></script>
 	<script src="/static/js/pano_LoadingManager.js"></script>
 	<script src="/static/js/pano_orbitcontrols.js"></script>
 	<script src="/static/js/pano_materials.js"></script>
@@ -148,21 +133,21 @@ params = getPanoParams();
 
 
 	<script>
-	
-	// gui
-	gui();
-	update();
-	
+
+		// gui
+		gui();
+		update();
+
 	</script>
-	
 
 
 
-<script>
-window.onload = function () {
-	$("#overlay").fadeOut(100);
-}
-</script>
+
+	<script>
+		window.onload = function () {
+			$("#overlay").fadeOut(100);
+		}
+	</script>
 
 
 
